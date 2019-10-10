@@ -1,0 +1,65 @@
+' Gambas class file
+
+Public Sub _new()
+
+End
+
+Public Sub Form_Open()
+  'leer archivo datos
+  'leer modelo
+
+  Dim datos As String[]
+  Dim modelo As String
+  Dim modelotemp As String
+  Dim a As Integer
+  Dim linea As String
+  Dim TOKENS As STRING[]
+  Dim nombrefichero As String
+  Dim salida As String
+
+  datos = Split(File.Load("datos.txt"), "\n")
+  modelo = File.Load("MODELO.fods")
+
+  datos.Delete(0) ' la linea 0 contiene las cabecera de nombre de campos
+  'por cada linea de archivo:
+  For Each linea In datos
+
+    modelotEmp = modelo
+    TOKENS = Split(LINEA, "\t")
+    ' sustituir ##
+    If tokens.count < 6 Then
+      Continue 'puede que una linea este mal
+    Endif
+
+    modelotemp = reemplazodatos(modelotemp, "##PRESA##", TOKENS[1] & " MELONARES")
+    modelotemp = reemplazodatos(modelotemp, "##CODIGO_ACTIVIDAD##", TOKENS[3])
+    modelotemp = reemplazodatos(modelotemp, "##NOMBRE_ACTIVIDAD##", TOKENS[4])
+    modelotemp = reemplazodatos(modelotemp, "##OPE01##", tokens[5])
+    modelotemp = reemplazodatos(modelotemp, "##OPE02##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE03##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE04##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE05##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE06##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE07##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE08##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##OPE09##", " ")
+    modelotemp = reemplazodatos(modelotemp, "##PERIOCIDAD##", TOKENS[6])
+
+    ' guardar datos sustituidos en un nuevo archivo
+    nombrefichero = "/tmp/" & TOKENS[1] & " " & TOKENS[6] & " " & TOKENS[3] & ".fods"
+    File.Save(nombrefichero, modelotemp)
+    Wait 0.1
+    Shell "libreoffice --headless --convert-to xlsx '" & nombrefichero & "'" Wait
+
+    ' repetir
+
+  Next
+
+  '
+End
+
+Public Function reemplazodatos(completo As String, campo As String, dato As String) As String
+
+  Return Replace(completo, campo, dato)
+
+End

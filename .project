@@ -1,0 +1,23 @@
+# Gambas Project File 3.0
+Title=ccambioHojasCalculo
+Startup=FMain
+Version=0.0.3
+Component=gb.image
+Component=gb.qt4
+Component=gb.form
+Component=gb.qt4.ext
+Description="de datos txt a hoja de calculo cambiando datos de columnas"
+Authors="julio sanchez berro"
+TabSize=2
+Language=es_ES
+SourcePath=/home/minino/Media/E4C030B4C0308EB4/jsbsan
+Maintainer=jsbsan
+Address=jusabejusabe@gmail.com
+Url=https://jsbsan.blogspot.com/
+License=General Public License
+PackageName=ccambiohojascalculo-0.0.3
+CreateEachDirectory=1
+Packager=1
+Systems=debian
+Menus=debian:"Applications/Editors"
+Groups=debian:"admin"
